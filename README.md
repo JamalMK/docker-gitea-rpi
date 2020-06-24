@@ -25,9 +25,15 @@ The above command is broken down below:
 
 | -p 3000:3000            | Exposes port 3000 and maps it to Port 3000 on the container.                   |
 |-------------------------|--------------------------------------------------------------------------------|
-| -p 2222:22              | Exposes port 2222 and maps it to Port 22 on the container.                     |
+| -p 2222:22              | Exposes port 2222 on the host and maps it to Port 22 on the container.         |
 | -v gitea:/data          | Maps the docker volume named gitea to /data within the container.              |
 | --restart always        | Will ensure that the container restarts if it is every stopped for any reason. |
 | patrickthedev/gitea-rpi | The image from [Docker Hub](https://hub.docker.com/r/patrickthedev/gitea-rpi). |
 
-Note: I had to specify ports as ```2222:22``` instead of ```22:22``` because I am using SSH via port 22 to access the actual machine itself.
+## Other Random Notes
+
+I had to specify ports as ```2222:22``` instead of ```22:22``` because I am using SSH via port 22 to access the actual machine itself.
+
+Since the docker image is Alpine based, use ```apk add emacs``` to install a decent editor within the container.
+
+Good additional info on Gitea + Docker here: https://docs.gitea.io/en-us/install-with-docker/
