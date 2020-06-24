@@ -12,7 +12,22 @@ This work is a fork of [kapdap/gitea-rpi](https://hub.docker.com/r/kapdap/gitea-
 |x.x.x-y|Contains image version y with Gitea version x.x.x.
 
 ## Usage
+In order to ensure that your data and configuration for Gitea remain in place after container restarts and updates, a volume must be created within Docker. To create a Docker volume, use the command below which creates a docker volume on your system called ```gitea```.
+
 ```bash
-docker volume create gitea_data
-docker run -d -p 22:22 -p 3000:3000 -v gitea_data:/data patrickthedev/gitea-rpi
+docker volume create gitea
 ```
+
+```bash
+docker run -d -p 2222:22 -p 3000:3000 -v gitea:/data patrickthedev/gitea-rpi
+```
+The above command is broken down below:
+
+| -p 3000:3000            | Exposes port 3000 and maps it to Port 3000 on the container.                   |
+|-------------------------|--------------------------------------------------------------------------------|
+| -p 2222:22              | Exposes port 2222 and maps it to Port 22 on the container.                     |
+| -v gitea:/data          | Maps the docker volume named gitea to /data within the container.              |
+| --restart always        | Will ensure that the container restarts if it is every stopped for any reason. |
+| patrickthedev/gitea-rpi | The image from [Docker Hub](https://hub.docker.com/r/patrickthedev/gitea-rpi). |
+
+Note: I had to specify ports as ```2222:22``` instead of ```22:22``` because I am using SSH via port 22 to access the actual machine itself.
