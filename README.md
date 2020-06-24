@@ -17,7 +17,7 @@ In order to ensure that your data and configuration for Gitea remain in place af
 ```bash
 docker volume create gitea
 ```
-
+Then run the Gitea Container in Docker with the command below:
 ```bash
 docker run -d -p 2222:22 -p 3000:3000 -v gitea:/data patrickthedev/gitea-rpi
 ```
